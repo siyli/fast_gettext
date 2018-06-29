@@ -21,6 +21,11 @@ module FastGettext
       FastGettext.cached_find(key) or (block ? block.call : key)
     end
 
+    # Translate with context
+    def p_(context, key, &block)
+      FastGettext.cached_find("#{context}\004#{key}") or FastGettext.cached_find(key) or (block ? block.call : key)
+    end
+
     #translate pluralized
     # some languages have up to 4 plural forms...
     # n_(singular, plural, plural form 2, ..., count)

@@ -36,7 +36,7 @@ describe FastGettext::Translation do
       _('Untranslated').should_not == ''
     end
 
-    it "returns key if not translation was found" do
+    it "returns key if no translation was found" do
       _('NOT|FOUND').should == 'NOT|FOUND'
     end
 
@@ -50,6 +50,16 @@ describe FastGettext::Translation do
 
     it "returns block when specified" do
       _('not found'){:block}.should == :block
+    end
+  end
+
+  describe :p_ do
+    it "translates simple text" do
+      p_('on a train', 'car').should == 'Wagen'
+    end
+
+    it "returns key if no translation was found" do
+      p_('on a train', 'NOT|FOUND').should == 'NOT|FOUND'
     end
   end
 
